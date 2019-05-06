@@ -8,6 +8,7 @@ class Google_Map_API():
     def get_map(self, center, key):
         #setup parameters for the api query
         #todo setup to handle different quantities of stops
+        #todo finish list of desired parameters
         parameters = {'center': 'center', 'key': {key}}
 
         #request data from google maps
