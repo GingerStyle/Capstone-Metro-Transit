@@ -2,26 +2,41 @@ import requests
 from requests.exceptions import HTTPError
 
 #urls for reqests
-formatLine = "?format=json"
+PARAMETERS = {'format': 'json'}
 routeUrl = "http://svc.metrotransit.org/NexTrip/Routes"
 directionUrl = "http://svc.metrotransit.org/NexTrip/Directions/"
 stopsUrl = "http://svc.metrotransit.org/NexTrip/Stops/"
 departTimeUrl = "http://svc.metrotransit.org/NexTrip/"
 
-def get_data(operation):
-    Url = ''
-    if operation == 'route':
-        Url = routeUrl + formatLine
-    elif operation == 'direction':
-        Url = directionUrl + formatLine
-    elif operation == 'stops':
-        Url = stopsUrl + formatLine
-    elif operation == 'departure':
-        Url = departTimeUrl + formatLine
+#method to build url to get routes
+def get_routes():
+    url = routeUrl
+    #call get_data to make request
+    get_data(url, PARAMETERS)
 
+#method to build url to get route directions for specific route
+def get_direction(route_num):
+    url = directionUrl + '/' + route_num
+    #call get_data to make request
+    get_data(url, PARAMETERS)
+
+#method to build url to get stops from specific route and direction
+def get_stops(route_num, direction):
+    url = stopsUrl + '/' + route_num + '/' + direction
+    #call get_data to make request
+    get_data(url, PARAMETERS)
+
+#method to build url to get departure times for specific stop, route, and direction
+def get_times(route, direction, stop):
+    url = departTimeUrl + '/' + route + '/' + direction + '/' + stop
+    #call get_data to make request
+    get_data(url, PARAMETERS)
+
+#method to use built urls to get data from metro transit
+def get_data(url, parameters):
     #request data from metro transit
     try:
-        response = requests.get(Url)
+        response = requests.get(url, params=parameters)
         #raise error if certain response codes are returned
         response.raise_for_status()
     except HTTPError as http_err:
@@ -31,5 +46,3 @@ def get_data(operation):
     else:
         return response
 
-
-#todo create method to cross reference addresses to get five digit stop id
