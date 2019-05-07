@@ -12,9 +12,4 @@ def main():
     api_manager.get_routes()
 
 
-
-
-
-
-
 main()
