@@ -46,9 +46,12 @@ def get_times(route, direction, stop):
 def get_data(url, parameters):
     #request data from metro transit
     try:
-        response = requests.get(url, params=parameters).json
+        response = requests.get(url, params=parameters)
         #raise error if certain response codes are returned
         response.raise_for_status()
+
+        return response.json() 
+        
     except HTTPError as http_err:
         print(f'HTTP error: {http_err}')
     except Exception as ex:
