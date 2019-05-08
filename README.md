@@ -13,3 +13,4 @@ V. short user manual
 Screenshots of app running
 
 ![App logo](assets/Capture.PNG)
+![Alt text](documentation/example.png)
