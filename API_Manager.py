@@ -10,11 +10,21 @@ maps_key = os.environ.get('GoogleMapsKey')
 metroTransit = Metro_Transit_API
 googleMaps = Google_Maps_API
 
+#instantiate instance of UI
+ui = UI
+
 #method to take routes and return to main controller as dictionary
 def get_routes():
     #get routes
     response = metroTransit.get_routes()
-    #todo put routes into drop down box on UI
+    #list to hold route numbers
+    route_numbers = []
+    for route in response:
+        print (route)
+        route_numbers.append(route['Route'])
+    #fill combobox with route numbers
+    ui.fill_routes(route_numbers)
+
 
 '''#method to get the directions for the route
 def get_directions():
