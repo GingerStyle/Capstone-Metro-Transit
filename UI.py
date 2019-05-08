@@ -14,7 +14,6 @@ class MainWindow(Frame):
         
         routes = API_Manager.get_routes()
         self.fill_routes(routes)
-        # todo add routes to route_menu 
         
 
     #method to fill the route_menu OptionMenu with available routes
@@ -32,7 +31,7 @@ class MainWindow(Frame):
 
         # set background image
         # todo get this working 
-        photo = PhotoImage(r'C:\Users\myles\PycharmProjects\MetroTransit\Capture.PNG')  # fix this path too
+        photo = PhotoImage(os.path.join('assets', 'Capture.PNG'))
         photo_label = Label(self.parent, image=photo)
         photo_label.photo = photo
         photo_label.place(x=0, y=0, relwidth=1, relheight=1)

@@ -23,7 +23,6 @@ def get_routes():
 
 def route_numbers_from_response(response):
     #list to hold route numbers
-    print(response)
     route_numbers = []
     for route in response:
         print (route)
