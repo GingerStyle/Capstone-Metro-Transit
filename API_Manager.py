@@ -1,3 +1,9 @@
+"""
+High-level management of APIs
+
+Connects to Metro Transit and Google Maps static map API 
+
+"""
 import os
 import Metro_Transit_API
 import Google_Maps_API
@@ -14,8 +20,10 @@ maps_key = os.environ.get('GoogleMapsKey')
 # ui = UI
 
 #method to take routes and return to main controller as dictionary
+
 def get_routes():
-    #get routes
+    """ Fetches all the Metro Transit route numbers for buses and trains """ 
+
     response = Metro_Transit_API.get_routes()
     route_numbers = route_numbers_from_response(response)
     return route_numbers
