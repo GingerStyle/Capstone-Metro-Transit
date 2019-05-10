@@ -19,17 +19,15 @@ maps_key = os.environ.get('GoogleMapsKey')
 #instantiate instance of UI
 # ui = UI
 
-#method to take routes and return to main controller as dictionary
-
 def get_routes():
     """ Fetches all the Metro Transit route numbers for buses and trains """ 
-
     response = Metro_Transit_API.get_routes()
     route_numbers = route_numbers_from_response(response)
     return route_numbers
 
 
 def route_numbers_from_response(response):
+    """extracts route numbers from the response and returns as a list"""
     #list to hold route numbers
     route_numbers = []
     for route in response:
@@ -38,12 +36,22 @@ def route_numbers_from_response(response):
     return route_numbers
 
 
-'''#method to get the directions for the route
+#method to get the directions for the route
 def get_directions(route_number):
-    
+    response = Metro_Transit_API.get_direction(route_number)
+    directions = directions_from_response(response)
+    return directions
 
 
-#method to get the stops for the route and selected direction
+def directions_from_response(response):
+    """extracts the directions from the response and returns a list"""
+    #list to hold route directions
+    directions = []
+    for direction in response:
+        directions.append(direction['Text'])
+    return directions
+
+'''#method to get the stops for the route and selected direction
 def get_stops():
 
 

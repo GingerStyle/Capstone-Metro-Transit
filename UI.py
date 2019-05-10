@@ -4,6 +4,7 @@ from tkinter import *
 import os 
 import API_Manager
 
+"""This class controls the user interface of the program as well as creates the window and widgets in the window."""
 class MainWindow(Frame):
 
     def __init__(self, parent=None):
@@ -16,12 +17,16 @@ class MainWindow(Frame):
         self.fill_routes(routes)
         
 
-    #method to fill the route_menu OptionMenu with available routes
+    """method to fill the route_menu Combobox with available routes"""
     def fill_routes(self, route_list):
         #fill with items from the list
         self.route_menu['values'] = route_list
 
+    """method to fill the direction_menu combobox with available route directions"""
+    def fill_directions(self, direction_list):
+        self.direction_menu['values'] = direction_list
 
+    """method used to create and pack widgets on the main window"""
     def create_widgets(self):
         # set title
         self.parent.title('Metro Transit Departure Time Finder')
@@ -68,6 +73,37 @@ class MainWindow(Frame):
         self.stop_label.grid(row=4, column=2, sticky=S)
         self.stop_menu.grid(row=5, column=2)
         self.go_button.grid(row=6, column=2)
+
+        """event handlers"""
+        """This handler gets the directions of a route after a route has been selected from the route_menu combobox
+        and puts them in the direction_menu combobox"""
+        def route_selected(event):
+            #get selected item
+            selected = self.route_menu.get()
+            directions = API_Manager.get_directions(selected)
+            #clear the directions_menu combobox selection
+            self.direction_menu.set('')
+            #populate the combobox with the response data
+            self.fill_directions(directions)
+
+        """This handler gets the stops after a direction has been selected from the direction_menu combobox and puts them
+        in the stop_menu combobox"""
+        def direction_selected(event):
+            route = self.route_menu.get()
+            direction = self.direction_menu.get()
+
+        """This handler gets the departure times and map when the go button has been pressed"""
+        def go_pressed(event):
+            route = self.route_menu.get()
+            direction = self.direction_menu.get()
+            stop = self.stop_menu.get()
+
+        #bind widgets to event handlers
+        self.route_menu.bind("<<ComboboxSelected>>", route_selected)
+        self.direction_menu.bind("<<ComboboxSelected>>", direction_selected)
+        self.go_button.bind("<Button-1>", go_pressed)
+
+
 
 
 def main():
