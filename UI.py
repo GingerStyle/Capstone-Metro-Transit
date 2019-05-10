@@ -26,6 +26,10 @@ class MainWindow(Frame):
     def fill_directions(self, direction_list):
         self.direction_menu['values'] = direction_list
 
+    """method to fill stops_menu combobox with transit stops"""
+    def fill_stops(self, stop_list):
+        self.stop_menu['values'] = stop_list
+
     """method used to create and pack widgets on the main window"""
     def create_widgets(self):
         # set title
@@ -58,10 +62,15 @@ class MainWindow(Frame):
         #todo create lists to store API responses to fill OptionMenus
         self.route_menu = ttk.Combobox(self.button_frame, state='readonly', values=[])
         self.direction_menu = ttk.Combobox(self.button_frame, state='readonly', values=[])
+        #start as disabled
+        self.direction_menu.config(state=DISABLED)
         self.stop_menu = ttk.Combobox(self.button_frame, state='readonly', values=[])
+        #start as disabled
+        self.stop_menu.config(state=DISABLED)
 
         #create button
         self.go_button = Button(self.button_frame, text='GO!', bg='blue', fg='yellow')
+        self.go_button.config(state=DISABLED)
 
         #pack contents
         self.button_frame.pack(side=LEFT)
@@ -79,10 +88,15 @@ class MainWindow(Frame):
         and puts them in the direction_menu combobox"""
         def route_selected(event):
             #get selected item
-            selected = self.route_menu.get()
-            directions = API_Manager.get_directions(selected)
-            #clear the directions_menu combobox selection
+            route = self.route_menu.get()
+            directions = API_Manager.get_directions(route)
+            #enable direction_menu combobox
+            self.direction_menu.config(state=ACTIVE)
+            #clear the combobox selections
             self.direction_menu.set('')
+            self.stop_menu.set('')
+            #disable stops_menu combobox
+            self.stop_menu.config(state=DISABLED)
             #populate the combobox with the response data
             self.fill_directions(directions)
 
@@ -91,6 +105,23 @@ class MainWindow(Frame):
         def direction_selected(event):
             route = self.route_menu.get()
             direction = self.direction_menu.get()
+            #convert text to direction code for api
+            direction_code = ''
+            if direction == 'NORTHBOUND':
+                direction_code = '4'
+            elif direction == 'SOUTHBOUND':
+                direction_code = '1'
+            elif direction == 'WESTBOUND':
+                direction_code = '3'
+            elif direction == 'EASTBOUND':
+                direction_code = '2'
+
+            stops = API_Manager.get_stops(route, direction_code)
+            #enable the stop_menu combobox
+            self.stop_menu.config(state=ACTIVE)
+            #clear the stop_menu combobox selection
+            self.stop_menu.set('')
+            self.fill_stops(stops)
 
         """This handler gets the departure times and map when the go button has been pressed"""
         def go_pressed(event):

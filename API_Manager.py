@@ -36,8 +36,8 @@ def route_numbers_from_response(response):
     return route_numbers
 
 
-#method to get the directions for the route
 def get_directions(route_number):
+    """Fetches directions of selected route from the Metro Transit API"""
     response = Metro_Transit_API.get_direction(route_number)
     directions = directions_from_response(response)
     return directions
@@ -51,11 +51,22 @@ def directions_from_response(response):
         directions.append(direction['Text'])
     return directions
 
-'''#method to get the stops for the route and selected direction
-def get_stops():
+#method to get the stops for the route and selected direction
+def get_stops(route_num, direction):
+    """Fetches the  stops for a selected route and direction from the Metro Transit API"""
+    response = Metro_Transit_API.get_stops(route_num, direction)
+    stops = stops_from_response(response)
+    return stops
 
+def stops_from_response(response):
+    """Extracts the stops from the response and returns as a list"""
+    #list to hold stops
+    stops = []
+    for stop in response:
+        stops.append(stop['Text'])
+    return stops
 
-#method to get the stop times
+'''#method to get the stop times
 def get_times():
 
 
