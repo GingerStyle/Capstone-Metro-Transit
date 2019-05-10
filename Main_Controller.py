@@ -8,7 +8,6 @@ def main():
 
     #get the currently running routes
     routes = API_Manager.get_routes()
-    MainWindow.setRoutes(routes)
 
 
 main()

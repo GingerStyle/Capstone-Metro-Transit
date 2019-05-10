@@ -45,6 +45,10 @@ class MainWindow(Frame):
         self.direction_label = Label(self.button_frame, text='Select Your Direction', bg='blue', fg='yellow')
         self.stop_label = Label(self.button_frame, text='Select Your Stop', bg='blue', fg='yellow')
 
+        #create blank labels to space out things on window
+        self.blank_label1 = Label(self.button_frame, text='  ')
+        #self.blank_label2 = Label
+
         #create comboboxes
         #todo create lists to store API responses to fill OptionMenus
         self.route_menu = ttk.Combobox(self.button_frame, state='readonly', values=[])

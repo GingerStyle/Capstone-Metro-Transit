@@ -25,10 +25,8 @@ def route_numbers_from_response(response):
     #list to hold route numbers
     route_numbers = []
     for route in response:
-        print (route)
         route_numbers.append(route['Route'])
     #fill combobox with route numbers
-    print(route_numbers)
     return route_numbers
 
 
