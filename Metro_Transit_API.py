@@ -14,7 +14,6 @@ def get_routes():
     url = routeUrl
     #call get_data to make request
     response = get_data(url, PARAMETERS)
-    print(f'response: {response}')
     return response
 
 
@@ -56,6 +55,4 @@ def get_data(url, parameters):
         print(f'HTTP error: {http_err}')
     except Exception as ex:
         print(f'Other error: {ex}')
-    else:
-        return response
 

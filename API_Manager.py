@@ -12,15 +12,9 @@ import Google_Maps_API
 #get api key from the os
 maps_key = os.environ.get('GoogleMapsKey')
 
-#instantiate instances of APIs
-# metroTransit = Metro_Transit_API
-# googleMaps = Google_Maps_API
-
-#instantiate instance of UI
-# ui = UI
-
 def get_routes():
     """ Fetches all the Metro Transit route numbers for buses and trains """ 
+
     response = Metro_Transit_API.get_routes()
     route_numbers = route_numbers_from_response(response)
     return route_numbers
@@ -28,6 +22,7 @@ def get_routes():
 
 def route_numbers_from_response(response):
     """extracts route numbers from the response and returns as a list"""
+
     #list to hold route numbers
     route_numbers = []
     for route in response:
@@ -38,6 +33,7 @@ def route_numbers_from_response(response):
 
 def get_directions(route_number):
     """Fetches directions of selected route from the Metro Transit API"""
+
     response = Metro_Transit_API.get_direction(route_number)
     directions = directions_from_response(response)
     return directions
@@ -45,31 +41,52 @@ def get_directions(route_number):
 
 def directions_from_response(response):
     """extracts the directions from the response and returns a list"""
+
     #list to hold route directions
     directions = []
     for direction in response:
         directions.append(direction['Text'])
     return directions
 
-#method to get the stops for the route and selected direction
+
 def get_stops(route_num, direction):
     """Fetches the  stops for a selected route and direction from the Metro Transit API"""
+
     response = Metro_Transit_API.get_stops(route_num, direction)
     stops = stops_from_response(response)
     return stops
 
+
 def stops_from_response(response):
-    """Extracts the stops from the response and returns as a list"""
+    """Extracts the stops and ids from the response and returns a dictionary with the stop
+    as the key and the stop id as the value"""
+
     #list to hold stops
-    stops = []
+    stops = {}
     for stop in response:
-        stops.append(stop['Text'])
+        dict_entry = {stop['Text']: stop['Value']}
+        stops.update(dict_entry)
     return stops
 
-'''#method to get the stop times
-def get_times():
+
+def get_times(route_num, direction, stop_id):
+    """Fetches departure times for the given route, direction, and specific stop form Metro Transit"""
+
+    response = Metro_Transit_API.get_times(route_num, direction, stop_id)
+    times = times_from_response(response)
+    return times
 
 
-#method to get the map
+def times_from_response(response):
+    """Extracts departure times from the response and returns as a string"""
+
+    #list to hold departure times
+    times = []
+    for time in response:
+        times.append(time['DepartureText'])
+    return times
+
+
+'''#method to get the map
 def get_map():
 '''

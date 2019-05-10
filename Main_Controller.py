@@ -4,10 +4,10 @@ import tkinter as tk
 
 import API_Manager
 
-def main():
+#def main():
 
     #get the currently running routes
-    routes = API_Manager.get_routes()
+    #routes = API_Manager.get_routes()
 
 
-main()
+#main()
