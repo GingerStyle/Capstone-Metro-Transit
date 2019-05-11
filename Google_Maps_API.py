@@ -1,3 +1,7 @@
+"""
+Stores url information and connection method for the Google Maps Static Map API
+"""
+
 import requests
 from requests.exceptions import HTTPError
 

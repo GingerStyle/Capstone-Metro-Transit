@@ -1,10 +1,12 @@
+"""This class controls the user interface of the program as well as creates the window and widgets in the window."""
+
 import tkinter as tk
 from tkinter import ttk
 from tkinter import *
 import os 
 import API_Manager
 
-"""This class controls the user interface of the program as well as creates the window and widgets in the window."""
+
 class MainWindow(Frame):
 
     """dictionary to hold the stop name and stop id so I can reference the stop id based on the stop name that is

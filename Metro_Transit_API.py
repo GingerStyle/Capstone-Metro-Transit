@@ -1,3 +1,7 @@
+"""
+Stores url information, url string builder methods, and connection method for the Metro Transit API
+"""
+
 import requests
 from requests.exceptions import HTTPError
 

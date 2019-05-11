@@ -4,6 +4,7 @@ import API_Manager
 import unittest
 
 class TestAPIPRocessing(unittest.TestCase):
+    """API_Manager.py tests"""
     def test_get_routes_response_processing(self):
         """Test that the API_Manager.get_routes response is processed into a list of route numbers correctly"""
 
@@ -50,6 +51,8 @@ class TestAPIPRocessing(unittest.TestCase):
 
         times = API_Manager.times_from_response(example_response)
         self.assertEqual(['3 Min', '8 Min', '2:59'], times)
+
+    """"""
 
 
 if __name__ == '__main__':
