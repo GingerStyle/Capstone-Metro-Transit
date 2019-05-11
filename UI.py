@@ -117,8 +117,9 @@ class MainWindow(Frame):
         self.go_button = Button(self.button_frame, text='GO!', bg='blue', fg='yellow')
         self.go_button.config(state=DISABLED)
 
-        #create Text field for departure times
+        #create Text fields for departure times and map
         self.departures_text = Text(self.map_frame, width=20, height=20)
+        self.map_text = Text(self.map_frame, width=80, height=40)
 
         #pack contents
         self.button_frame.pack(side=LEFT)
@@ -131,6 +132,7 @@ class MainWindow(Frame):
         self.stop_menu.grid(row=5, column=2)
         self.go_button.grid(row=6, column=2)
         self.departures_text.grid(row=0, column=0)
+        self.map_text.grid(row=0, column=1, sticky=E)
 
         """event handlers"""
 
@@ -202,16 +204,16 @@ class MainWindow(Frame):
             stop_id = self.STOP_INFO[stop]
             #get departure times from Metro Transit
             times = API_Manager.get_times(route, direction_code, stop_id)
-
             #get map from Google Maps
-
+            #todo create list of intersections to send to map request
+            map = API_Manager.get_map()
             # clear Text area
             self.departures_text.delete(1.0, END)
             #fill departures_text with departure times
             self.fill_departure_times(times)
-
             #display map on ui
-
+            photo = PhotoImage(file=map)
+            self.map_text.image_create(END, image=photo)
 
         #bind widgets to event handlers
         self.route_menu.bind("<<ComboboxSelected>>", route_selected)

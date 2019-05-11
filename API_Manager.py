@@ -7,7 +7,7 @@ Connects to Metro Transit and Google Maps static map API
 import os
 import Metro_Transit_API
 import Google_Maps_API
-# import UI
+
 
 #get api key from the os
 maps_key = os.environ.get('GoogleMapsKey')
@@ -87,6 +87,8 @@ def times_from_response(response):
     return times
 
 
-'''#method to get the map
 def get_map():
-'''
+    """Sends map to the ui"""
+
+    map = Google_Maps_API.get_map(maps_key)
+    return map
