@@ -7,6 +7,7 @@ Connects to Metro Transit and Google Maps static map API
 import os
 import Metro_Transit_API
 import Google_Maps_API
+import base64
 
 
 #get api key from the os
@@ -95,10 +96,16 @@ def get_map(intersection_list):
     map_center = Google_Maps_API.get_map_center(intersection_list)
     map = Google_Maps_API.get_map(marker_list, visible_list, map_center, maps_key)
     #save map to file
-    gif_file = open("map_gif.txt", "w+")
+    open("map_gif.txt", "w+")
     with open('map_gif.txt', 'wb') as fd:
         for chunk in map.iter_content(chunk_size=128):
             fd.write(chunk)
+    """
+    with open('map_gif.txt', 'rb') as imagefile:
+        base64string = base64.b64encode(imagefile.read()).decode('ascii')
+    print(base64string)
+    with open('map_gif.txt', 'w') as outputfile:
+        outputfile.write(base64string)
     gif_file.close()
-
+"""
     #return map
