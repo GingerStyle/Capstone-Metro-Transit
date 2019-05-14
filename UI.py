@@ -1,4 +1,6 @@
-"""This class controls the user interface of the program as well as creates the window and widgets in the window."""
+"""
+This class controls the user interface of the program as well as creates the window and widgets in the window.
+"""
 
 import tkinter as tk
 from tkinter import ttk
@@ -75,6 +77,23 @@ class MainWindow(Frame):
         return direction_code
 
 
+    def get_intersection_list(self):
+        """Gets list of stops/intersections from keys of the STOP_INFO dict"""
+
+        #list to hold intersections
+        *stop_list, = self.STOP_INFO
+
+        #remove spaces after each string
+        intersection_list = []
+        #remoce space at the end and convert double spaces to single spaces
+        for stop in stop_list:
+            stop = stop.strip(' ')
+            stop = stop.replace('  ', ' ')
+            intersection_list.append(stop)
+
+        return intersection_list
+
+
     def create_widgets(self):
         """method used to create and pack widgets on the main window"""
 
@@ -87,9 +106,14 @@ class MainWindow(Frame):
         # set background image
         # todo get this working 
         photo = PhotoImage(os.path.join('assets', 'Capture.PNG'))
-        photo_label = Label(self.parent, image=photo)
-        photo_label.photo = photo
-        photo_label.place(x=0, y=0, relwidth=1, relheight=1)
+        width = photo.width()
+        height = photo.height()
+        self.photo_canvas = Canvas(width = width, height=height)
+        self.photo_canvas.pack(side='top', fill='both', expand='yes')
+        self.photo_canvas.create_image(0, 0, image=photo, anchor='nw')
+
+        #self.photo_label.photo = photo
+        #self.photo_label.place(x=0, y=0, relwidth=10, relheight=10)
 
         # create frames
         self.button_frame = Frame(self.parent)
@@ -102,7 +126,8 @@ class MainWindow(Frame):
 
         #create blank labels to space out things on window
         self.blank_label1 = Label(self.button_frame, text='  ')
-        #self.blank_label2 = Label
+        self.blank_label2 = Label(self.button_frame, text='  ')
+        self.blank_label3 = Label(self.button_frame, text='  ')
 
         #create comboboxes
         self.route_menu = ttk.Combobox(self.button_frame, state='readonly', values=[])
@@ -126,11 +151,14 @@ class MainWindow(Frame):
         self.map_frame.pack(side=RIGHT)
         self.route_label.grid(row=0, column=2, sticky=S)
         self.route_menu.grid(row=1, column=2)
-        self.direction_label.grid(row=2, column=2, sticky=S)
-        self.direction_menu.grid(row=3, column=2)
-        self.stop_label.grid(row=4, column=2, sticky=S)
-        self.stop_menu.grid(row=5, column=2)
-        self.go_button.grid(row=6, column=2)
+        self.blank_label1.grid(row=2,column=2)
+        self.direction_label.grid(row=3, column=2, sticky=S)
+        self.direction_menu.grid(row=4, column=2)
+        self.blank_label2.grid(row=5, column=2)
+        self.stop_label.grid(row=6, column=2, sticky=S)
+        self.stop_menu.grid(row=7, column=2)
+        self.blank_label3.grid(row=8, column=2)
+        self.go_button.grid(row=9, column=2)
         self.departures_text.grid(row=0, column=0)
         self.map_text.grid(row=0, column=1, sticky=E)
 
@@ -183,7 +211,7 @@ class MainWindow(Frame):
 
 
         def stop_selected(event):
-            """This handler enables the go_button after the stop is selected"""
+            """This handler enables the go_button and clears the departures_text Text widget after the stop is selected"""
 
             #enable go_button
             self.go_button.config(state=ACTIVE)
@@ -206,13 +234,15 @@ class MainWindow(Frame):
             times = API_Manager.get_times(route, direction_code, stop_id)
             #get map from Google Maps
             #todo create list of intersections to send to map request
-            map = API_Manager.get_map()
+            intersection_list = self.get_intersection_list()
+            map = API_Manager.get_map(intersection_list)
+            #print(map)
             # clear Text area
             self.departures_text.delete(1.0, END)
             #fill departures_text with departure times
             self.fill_departure_times(times)
             #display map on ui
-            photo = PhotoImage(file=map)
+            #photo = PhotoImage(file=)
             self.map_text.image_create(END, image=photo)
 
         #bind widgets to event handlers

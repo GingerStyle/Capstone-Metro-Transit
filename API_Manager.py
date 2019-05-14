@@ -87,8 +87,11 @@ def times_from_response(response):
     return times
 
 
-def get_map():
-    """Sends map to the ui"""
+def get_map(intersection_list):
+    """Sends intersection_list to build strings for the markers and visible parameters then get the map and send to the ui"""
 
-    map = Google_Maps_API.get_map(maps_key)
+    marker_list = Google_Maps_API.build_marker_string(intersection_list)
+    #visible_String = Google_Maps_API.build_visible_string(intersection_list)
+    map = Google_Maps_API.get_map(marker_list, intersection_list, maps_key)
+
     return map
