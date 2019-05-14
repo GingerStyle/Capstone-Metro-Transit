@@ -104,16 +104,10 @@ class MainWindow(Frame):
         self.parent.iconbitmap(os.path.join('assets', 'Bus_Stop.ico'))
 
         # set background image
-        # todo get this working 
-        photo = PhotoImage(os.path.join('assets', 'Capture.PNG'))
-        width = photo.width()
-        height = photo.height()
-        self.photo_canvas = Canvas(width = width, height=height)
-        self.photo_canvas.pack(side='top', fill='both', expand='yes')
-        self.photo_canvas.create_image(0, 0, image=photo, anchor='nw')
-
-        #self.photo_label.photo = photo
-        #self.photo_label.place(x=0, y=0, relwidth=10, relheight=10)
+        self.background_photo = PhotoImage(file=os.path.join('assets', 'Capture.PNG'))
+        self.photo_label = Label(self.parent, image=self.background_photo)
+        self.photo_label.photo = self.background_photo
+        self.photo_label.place(x=0, y=0, relwidth=1, relheight=1)
 
         # create frames
         self.button_frame = Frame(self.parent)

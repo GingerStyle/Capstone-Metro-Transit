@@ -88,12 +88,45 @@ def times_from_response(response):
     return times
 
 
+def build_marker_list(intersection_list):
+    """Builds marker points for each stop intersection for the map to display"""
+
+    #process each stop/intersection in the correct form as a marker and add to marker_string
+    marker_list = []
+    marker_string = 'size:mid|color:red|'
+    for point in intersection_list:
+        point = marker_string + point
+        marker_list.append(point)
+    print(marker_list)
+
+    return marker_list
+
+
+def build_visible_list(intersection_list):
+    """Takes the first and last stop on the route and add to a list used to make sure they are both visible on the map."""
+
+    #process each stop/intersection in the correct for to be visible on the map and add to visible_String
+    visible_list = []
+    visible_list.append(intersection_list[0])
+    visible_list.append(intersection_list[len(intersection_list) - 1])
+
+    return visible_list
+
+def get_map_center(intersection_list):
+    """takes the middle stop on the route and uses it for the center of the map"""
+
+    list_middle = len(intersection_list) / 2
+    map_center = intersection_list[int(list_middle)]
+
+    return map_center
+
+
 def get_map(intersection_list):
     """Sends intersection_list to build strings for the markers and visible parameters then get the map and save to a file"""
 
-    marker_list = Google_Maps_API.build_marker_string(intersection_list)
-    visible_list = Google_Maps_API.build_visible_string(intersection_list)
-    map_center = Google_Maps_API.get_map_center(intersection_list)
+    marker_list = build_marker_list(intersection_list)
+    visible_list = build_visible_list(intersection_list)
+    map_center = get_map_center(intersection_list)
     map = Google_Maps_API.get_map(marker_list, visible_list, map_center, maps_key)
     #save map to file
 

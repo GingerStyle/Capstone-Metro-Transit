@@ -1,10 +1,11 @@
 """This class holds all the tests to test the API_Manager requests, and """
 
 import API_Manager
+import UI
 import unittest
 
 class TestAPIPRocessing(unittest.TestCase):
-    """API_Manager.py tests"""
+    #API_Manager.py tests
     def test_get_routes_response_processing(self):
         """Test that the API_Manager.get_routes response is processed into a list of route numbers correctly"""
 
@@ -52,7 +53,46 @@ class TestAPIPRocessing(unittest.TestCase):
         times = API_Manager.times_from_response(example_response)
         self.assertEqual(['3 Min', '8 Min', '2:59'], times)
 
-    """"""
+
+    def test_build_marker_list_processing(self):
+        """Testing API_Manager.build_marker_list for proper string concatenation"""
+
+        example_list = ['Apple Valley', 'Minneapolis']
+
+        list = API_Manager.build_marker_list(example_list)
+        self.assertEqual(['size:mid|color:red|Apple Valley', 'size:mid|color:red|Minneapolis'], list)
+
+
+    def test_build_visible_list_processing(self):
+        """Testing API_Manager.build_visible_list for proper list conversion"""
+
+        example_list = ['Apple Valley', 'Bloomington', 'St. Paul', 'Minneapolis']
+
+        list = API_Manager.build_visible_list(example_list)
+        self.assertEqual(['Apple Valley', 'Minneapolis'], list)
+
+
+    #UI Tests
+
+    #def test_convert_to_direction_code(self):
+        """Test that convert_to_direction_code returns the correct code"""
+"""
+        direction = 'NORTHBOUND'
+        code = UI.convert_to_direction_code(direction)
+        self.assertEqual('4', code)
+
+        direction = 'SOUTHBOUND'
+        code = UI.convert_to_direction_code(direction)
+        self.assertEqual('1', code)
+
+        direction = 'EASTBOUND'
+        code = UI.convert_to_direction_code(direction)
+        self.assertEqual('2', code)
+
+        direction = 'WESTHBOUND'
+        code = UI.convert_to_direction_code(direction)
+        self.assertEqual('3', code)
+        """
 
 
 if __name__ == '__main__':
