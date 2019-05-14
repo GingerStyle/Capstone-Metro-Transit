@@ -22,26 +22,27 @@ def build_marker_string(intersection_list):
 
 
 def build_visible_string(intersection_list):
-    """Builds visible points for each stop intersection for the map to display"""
+    """Takes the first and last stop on the route and add to a list used to make sure they are both visible on the map."""
 
     #process each stop/intersection in the correct for to be visible on the map and add to visible_String
-    visible_string = ''
-    for stop in intersection_list:
-        #replace spaces
-        stop = stop.replace(' ', '%20')
-        #add formatting to visible
-        stop = stop + '%7C'
-        visible_string += stop
-    # removing last space characters
-    visible_string = visible_string.strip('%7C')
+    visible_list = []
+    visible_list.append(intersection_list[0])
+    visible_list.append(intersection_list[len(intersection_list) - 1])
 
-    return visible_string
+    return visible_list
+
+def get_map_center(intersection_list):
+    """takes the middle stop on the route and uses it for the center of the map"""
+
+    list_middle = len(intersection_list) / 2
+    map_center = intersection_list[int(list_middle)]
+
+    return map_center
 
 
-def get_map(marker_list, visible_list, key):
+def get_map(marker_list, visible_list, map_center, key):
     #setup parameters for the api query
-    #todo finish list of desired parameters
-    parameters = {'size': '900x900', 'format': 'gif', 'markers': marker_list, 'visible': visible_list,'key': key}
+    parameters = {'size': '900x900', 'format': 'gif', 'center': map_center,'markers': marker_list, 'visible': visible_list,'key': key}
     response = make_request(parameters, map_url)
     return response
 
