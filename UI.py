@@ -85,7 +85,7 @@ class MainWindow(Frame):
 
         #remove spaces after each string
         intersection_list = []
-        #remoce space at the end and convert double spaces to single spaces
+        #remove space at the end of each string and convert any double spaces to single spaces
         for stop in stop_list:
             stop = stop.strip(' ')
             stop = stop.replace('  ', ' ')
@@ -233,16 +233,14 @@ class MainWindow(Frame):
             #get departure times from Metro Transit
             times = API_Manager.get_times(route, direction_code, stop_id)
             #get map from Google Maps
-            #todo create list of intersections to send to map request
             intersection_list = self.get_intersection_list()
-            map = API_Manager.get_map(intersection_list)
-            #print(map)
+            API_Manager.get_map(intersection_list)
             # clear Text area
             self.departures_text.delete(1.0, END)
             #fill departures_text with departure times
             self.fill_departure_times(times)
             #display map on ui
-            #photo = PhotoImage(file=)
+            photo = PhotoImage(file='map_gif.txt')
             self.map_text.image_create(END, image=photo)
 
         #bind widgets to event handlers

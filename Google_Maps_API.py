@@ -17,7 +17,7 @@ def build_marker_string(intersection_list):
     for point in intersection_list:
         point = marker_string + point
         marker_list.append(point)
-    print(marker_list)
+
     return marker_list
 
 
@@ -50,7 +50,7 @@ def get_map(marker_list, visible_list, map_center, key):
 def make_request(parameters, map_url):
     #request data from google maps
     try:
-        response = requests.get(map_url, params=parameters)
+        response = requests.get(map_url, params=parameters, stream=True)
         #raise error is certain response codes are returned
         response.raise_for_status()
         return response
