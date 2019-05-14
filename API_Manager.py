@@ -100,12 +100,10 @@ def get_map(intersection_list):
     with open('map_gif.txt', 'wb') as fd:
         for chunk in map.iter_content(chunk_size=128):
             fd.write(chunk)
-    """
-    with open('map_gif.txt', 'rb') as imagefile:
-        base64string = base64.b64encode(imagefile.read()).decode('ascii')
-    print(base64string)
-    with open('map_gif.txt', 'w') as outputfile:
-        outputfile.write(base64string)
-    gif_file.close()
-"""
-    #return map
+
+    #with open('map_gif.txt', 'rb') as imagefile:
+     #   base64string = base64.b64encode(imagefile.read()).decode('ascii')
+    #print(base64string)
+    #with open('map_gif.txt', 'w') as outputfile:
+     #   outputfile.write(base64string)
+    #gif_file.close()
