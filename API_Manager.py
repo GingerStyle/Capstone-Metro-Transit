@@ -96,10 +96,16 @@ def get_map(intersection_list):
     map_center = Google_Maps_API.get_map_center(intersection_list)
     map = Google_Maps_API.get_map(marker_list, visible_list, map_center, maps_key)
     #save map to file
-    open("map_gif.txt", "w+")
-    with open('map_gif.txt', 'wb') as fd:
-        for chunk in map.iter_content(chunk_size=128):
-            fd.write(chunk)
+
+    data = map.text
+    #open("image.gif", "w").write(data)
+
+
+
+    #open("map_gif.txt", "w+")
+    #with open('map_gif.txt', 'wb') as fd:
+     #   for chunk in map.iter_content(chunk_size=128):
+      #      fd.write(chunk)
 
     #with open('map_gif.txt', 'rb') as imagefile:
      #   base64string = base64.b64encode(imagefile.read()).decode('ascii')

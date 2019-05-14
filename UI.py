@@ -240,8 +240,9 @@ class MainWindow(Frame):
             #fill departures_text with departure times
             self.fill_departure_times(times)
             #display map on ui
-            #photo = PhotoImage(file='map_gif.txt')
-            #self.map_text.image_create(END, image=photo)
+            self.photo = PhotoImage(file='staticmap.gif')
+            self.map_text.image_create(END, image=self.photo)
+
 
         #bind widgets to event handlers
         self.route_menu.bind("<<ComboboxSelected>>", route_selected)
