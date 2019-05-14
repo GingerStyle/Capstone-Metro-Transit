@@ -170,8 +170,9 @@ class MainWindow(Frame):
             #clear the combobox selections
             self.direction_menu.set('')
             self.stop_menu.set('')
-            #clear the Text area
+            #clear the Text area and map
             self.departures_text.delete(1.0, END)
+            self.map_text.delete(1.0, END)
             #disable stops_menu combobox and go_button
             self.stop_menu.config(state=DISABLED)
             self.go_button.config(state=DISABLED)
@@ -200,8 +201,9 @@ class MainWindow(Frame):
             #clear the stop_menu combobox selection
             self.stop_menu.set('')
             self.fill_stops(self.STOP_INFO)
-            #clear Text area
+            #clear Text area and map
             self.departures_text.delete(1.0, END)
+            self.map_text.delete(1.0, END)
 
 
         def stop_selected(event):
@@ -209,8 +211,9 @@ class MainWindow(Frame):
 
             #enable go_button
             self.go_button.config(state=ACTIVE)
-            #clear Text area
+            #clear Text area and map
             self.departures_text.delete(1.0, END)
+            self.map_text.delete(1.0, END)
 
 
         def go_pressed(event):
@@ -229,8 +232,9 @@ class MainWindow(Frame):
             #get map from Google Maps
             intersection_list = self.get_intersection_list()
             API_Manager.get_map(intersection_list)
-            # clear Text area
+            # clear Text area and map
             self.departures_text.delete(1.0, END)
+            self.map_text.delete(1.0, END)
             #fill departures_text with departure times
             self.fill_departure_times(times)
             #display map on ui

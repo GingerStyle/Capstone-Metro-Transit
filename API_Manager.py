@@ -97,7 +97,6 @@ def build_marker_list(intersection_list):
     for point in intersection_list:
         point = marker_string + point
         marker_list.append(point)
-    print(marker_list)
 
     return marker_list
 
