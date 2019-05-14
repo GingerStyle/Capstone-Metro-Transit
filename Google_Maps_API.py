@@ -13,8 +13,9 @@ def build_marker_string(intersection_list):
 
     #process each stop/intersection in the correct form as a marker and add to marker_string
     marker_list = []
-    marker_string = 'size:mid|color:red'
+    marker_string = 'size:mid|color:red|'
     for point in intersection_list:
+        point = marker_string + point
         marker_list.append(point)
     print(marker_list)
     return marker_list
