@@ -2,8 +2,9 @@
 
 This is a Python and TKinter GUI application that displays timetables for Metro Transit buses and trains. 
 
-## Installation instructions 
-Check the requirements.exe file to install all dependencies
+## Installation instructions
+Get an api key from the Google Maps Static Map API at https://developers.google.com/maps/documentation/maps-static/intro. Then create an environment variable called "GoogleMapsKey" and put your api key in there.
+Check the requirements.txt file to install all dependencies
  
 
 ## How to use 
