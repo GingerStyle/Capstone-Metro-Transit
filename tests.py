@@ -4,7 +4,7 @@ import API_Manager
 import unittest
 
 class TestAPIPRocessing(unittest.TestCase):
-    #API_Manager.py tests
+
     def test_get_routes_response_processing(self):
         """Test that the API_Manager.get_routes response is processed into a list of route numbers correctly"""
 
@@ -70,8 +70,6 @@ class TestAPIPRocessing(unittest.TestCase):
         list = API_Manager.build_visible_list(example_list)
         self.assertEqual(['Apple Valley', 'Minneapolis'], list)
 
-
-    #UI Tests
 
     def test_convert_to_direction_code(self):
         """Test that convert_to_direction_code returns the correct code"""
