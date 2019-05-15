@@ -238,7 +238,7 @@ class MainWindow(Frame):
             #fill departures_text with departure times
             self.fill_departure_times(times)
             #display map on ui
-            self.photo = PhotoImage(file='staticmap.gif')
+            self.photo = PhotoImage(file='map.gif')
             self.map_text.image_create(END, image=self.photo)
 
 

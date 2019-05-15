@@ -1,7 +1,7 @@
 """This class holds all the tests to test the API_Manager requests, and """
 
 import API_Manager
-import UI
+from UI import MainWindow
 import unittest
 
 class TestAPIPRocessing(unittest.TestCase):
@@ -74,25 +74,25 @@ class TestAPIPRocessing(unittest.TestCase):
 
     #UI Tests
 
-    #def test_convert_to_direction_code(self):
+    def test_convert_to_direction_code(self):
         """Test that convert_to_direction_code returns the correct code"""
-"""
+
         direction = 'NORTHBOUND'
-        code = UI.convert_to_direction_code(direction)
+        code = MainWindow.convert_to_direction_code(direction)
         self.assertEqual('4', code)
 
         direction = 'SOUTHBOUND'
-        code = UI.convert_to_direction_code(direction)
+        code = MainWindow.convert_to_direction_code(direction)
         self.assertEqual('1', code)
 
         direction = 'EASTBOUND'
-        code = UI.convert_to_direction_code(direction)
+        code = MainWindow.convert_to_direction_code(direction)
         self.assertEqual('2', code)
 
         direction = 'WESTHBOUND'
-        code = UI.convert_to_direction_code(direction)
+        code = MainWindow.convert_to_direction_code(direction)
         self.assertEqual('3', code)
-        """
+
 
 
 if __name__ == '__main__':

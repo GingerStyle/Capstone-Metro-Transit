@@ -93,7 +93,7 @@ def build_marker_list(intersection_list):
 
     #process each stop/intersection in the correct form as a marker and add to marker_string
     marker_list = []
-    marker_string = 'size:mid|color:red|'
+    marker_string = 'size:small|color:red|'
     for point in intersection_list:
         point = marker_string + point
         marker_list.append(point)
@@ -127,21 +127,9 @@ def get_map(intersection_list):
     visible_list = build_visible_list(intersection_list)
     map_center = get_map_center(intersection_list)
     map = Google_Maps_API.get_map(marker_list, visible_list, map_center, maps_key)
+
     #save map to file
+    with open('map.gif', 'wb') as map_gif:
+        for chunk in map.iter_content():
+            map_gif.write(chunk)
 
-    data = map.text
-    #open("image.gif", "w").write(data)
-
-
-
-    #open("map_gif.txt", "w+")
-    #with open('map_gif.txt', 'wb') as fd:
-     #   for chunk in map.iter_content(chunk_size=128):
-      #      fd.write(chunk)
-
-    #with open('map_gif.txt', 'rb') as imagefile:
-     #   base64string = base64.b64encode(imagefile.read()).decode('ascii')
-    #print(base64string)
-    #with open('map_gif.txt', 'w') as outputfile:
-     #   outputfile.write(base64string)
-    #gif_file.close()
