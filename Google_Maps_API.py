@@ -23,6 +23,7 @@ def make_request(parameters, map_url):
         response.raise_for_status()
 
         return response
+
     except HTTPError as http_err:
         print(f'HTTP error: {http_err}')
     except Exception as ex:

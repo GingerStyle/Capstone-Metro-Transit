@@ -51,7 +51,7 @@ class MainWindow(Frame):
 
 
     def fill_departure_times(self, times_list):
-        """method used to display departure times in the """
+        """method used to display departure times in the departures_text Text widget"""
 
         self.departures_text.insert(END, f'Next departures are:\n')
         count = 0
@@ -207,7 +207,7 @@ class MainWindow(Frame):
 
 
         def stop_selected(event):
-            """This handler enables the go_button and clears the departures_text Text widget after the stop is selected"""
+            """This handler enables the go_button and clears the departures_text Text widget and map after the stop is selected"""
 
             #enable go_button
             self.go_button.config(state=ACTIVE)

@@ -1,4 +1,4 @@
-"""This class holds all the tests to test the API_Manager requests, and """
+"""This class holds all the tests to test the API_Manager requests, and request processing"""
 
 import API_Manager
 from UI import MainWindow
@@ -60,7 +60,7 @@ class TestAPIPRocessing(unittest.TestCase):
         example_list = ['Apple Valley', 'Minneapolis']
 
         list = API_Manager.build_marker_list(example_list)
-        self.assertEqual(['size:mid|color:red|Apple Valley', 'size:mid|color:red|Minneapolis'], list)
+        self.assertEqual(['size:small|color:red|Apple Valley', 'size:small|color:red|Minneapolis'], list)
 
 
     def test_build_visible_list_processing(self):
