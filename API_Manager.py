@@ -50,6 +50,22 @@ def directions_from_response(response):
     return directions
 
 
+def convert_to_direction_code(direction):
+    """method used to convert the text direction into a direction code for the Metro Transit API"""
+
+    direction_code = ''
+    if direction == 'NORTHBOUND':
+        direction_code = '4'
+    elif direction == 'SOUTHBOUND':
+        direction_code = '1'
+    elif direction == 'WESTBOUND':
+        direction_code = '3'
+    elif direction == 'EASTBOUND':
+        direction_code = '2'
+
+    return direction_code
+
+
 def get_stops(route_num, direction):
     """Fetches the  stops for a selected route and direction from the Metro Transit API"""
 

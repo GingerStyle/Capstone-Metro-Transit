@@ -61,22 +61,6 @@ class MainWindow(Frame):
             count += 1
 
 
-    def convert_to_direction_code(self, direction):
-        """method used to convert the text direction into a direction code for the Metro Transit API"""
-
-        direction_code = ''
-        if direction == 'NORTHBOUND':
-            direction_code = '4'
-        elif direction == 'SOUTHBOUND':
-            direction_code = '1'
-        elif direction == 'WESTBOUND':
-            direction_code = '3'
-        elif direction == 'EASTBOUND':
-            direction_code = '2'
-
-        return direction_code
-
-
     def get_intersection_list(self):
         """Gets list of stops/intersections from keys of the STOP_INFO dict"""
 
@@ -189,7 +173,7 @@ class MainWindow(Frame):
             direction = self.direction_menu.get()
 
             #convert combobox text to a direction code for api
-            direction_code = self.convert_to_direction_code(direction)
+            direction_code = API_Manager.convert_to_direction_code(direction)
 
             #get the data from Metro Transit API
             self.STOP_INFO = API_Manager.get_stops(route, direction_code)
@@ -224,7 +208,7 @@ class MainWindow(Frame):
             direction = self.direction_menu.get()
             stop = self.stop_menu.get()
             #convertthe direction into the direction code
-            direction_code = self.convert_to_direction_code(direction)
+            direction_code = API_Manager.convert_to_direction_code(direction)
             #reference the STOP_INFO dictionary to get stop id from the selected stop name
             stop_id = self.STOP_INFO[stop]
             #get departure times from Metro Transit
@@ -255,4 +239,5 @@ def main():
     root.mainloop()
 
 
-main()
+if __name__ == '__main__':
+    main()
