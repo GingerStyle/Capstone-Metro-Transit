@@ -7,6 +7,7 @@ from tkinter import ttk
 from tkinter import *
 import os 
 import API_Manager
+import Database_Manager
 
 
 class MainWindow(Frame):
@@ -215,8 +216,8 @@ class MainWindow(Frame):
             times = API_Manager.get_times(route, direction_code, stop_id)
             #get map from Google Maps
             intersection_list = self.get_intersection_list()
-
-            API_Manager.get_map(intersection_list)
+            coordinate_list = Database_Manager.get_stops_list(intersection_list)
+            API_Manager.get_map(coordinate_list)
             # clear Text area and map
             self.departures_text.delete(1.0, END)
             self.map_text.delete(1.0, END)
