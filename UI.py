@@ -215,6 +215,7 @@ class MainWindow(Frame):
             times = API_Manager.get_times(route, direction_code, stop_id)
             #get map from Google Maps
             intersection_list = self.get_intersection_list()
+
             API_Manager.get_map(intersection_list)
             # clear Text area and map
             self.departures_text.delete(1.0, END)
